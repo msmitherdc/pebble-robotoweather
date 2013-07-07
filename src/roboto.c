@@ -253,7 +253,7 @@ void handle_init(AppContextRef ctx)
 	text_layer_init(&text_sunrise_layer, window.layer.frame);
 	text_layer_set_text_color(&text_sunrise_layer, GColorWhite);
 	text_layer_set_background_color(&text_sunrise_layer, GColorClear);
-	layer_set_frame(&text_sunrise_layer.layer, GRect(7, 145, 100, 30));
+	layer_set_frame(&text_sunrise_layer.layer, GRect(7, 143, 100, 30));
 	text_layer_set_font(&text_sunrise_layer, font_sun);
 	layer_add_child(&window.layer, &text_sunrise_layer.layer);
 
@@ -261,7 +261,7 @@ void handle_init(AppContextRef ctx)
 	text_layer_init(&text_sunset_layer, window.layer.frame);
 	text_layer_set_text_color(&text_sunset_layer, GColorWhite);
 	text_layer_set_background_color(&text_sunset_layer, GColorClear);
-	layer_set_frame(&text_sunset_layer.layer, GRect(100, 145, 100, 30));
+	layer_set_frame(&text_sunset_layer.layer, GRect(94, 143, 100, 30));
 	text_layer_set_font(&text_sunset_layer, font_sun);
 	layer_add_child(&window.layer, &text_sunset_layer.layer); 
 
