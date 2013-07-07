@@ -87,10 +87,10 @@ void success(int32_t cookie, int http_status, DictionaryIterator* received, void
 	if(temperature_tuple) {
 		weather_layer_set_temperature(&weather_layer, temperature_tuple->value->int16);
 	}
-	Tuple* fcsthigh_tuple = dict_find(received, WEATHER_KEY_FCSTHIGH);
-	if(fcsthigh_tuple) {
-		weather_layer_set_temperature(&weather_layer, fcsthigh_tuple->value->int16);
-	}
+//	Tuple* fcsthigh_tuple = dict_find(received, WEATHER_KEY_FCSTHIGH);
+//	if(fcsthigh_tuple) {
+//		weather_layer_set_temperature(&weather_layer, fcsthigh_tuple->value->int16);
+//	}
 	
 	link_monitor_handle_success();
 }
