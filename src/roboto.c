@@ -89,7 +89,15 @@ void success(int32_t cookie, int http_status, DictionaryIterator* received, void
 		weather_layer_set_temperature(&weather_layer, temperature_tuple->value->int16);
 	}
 	Tuple* fcstlow_tuple = dict_find(received, WEATHER_KEY_FCSTLOW);
-	text_layer_set_text(&text_sunrise_layer, fcstlow_tuple->value->int16);
+	static char fcst_text[]  = "";
+//	void weather_layer_set_forecast(WeatherLayer* weather_layer, int16_t h, int16_t l) {
+	memcpy(text_fcst_layer->fcst_text, itoa(l), 4);
+//	memcpy(&weather_layer->fcst_str[strlen(weather_layer->fcst_str)], "°/", 3);
+//	memcpy(&weather_layer->fcst_str[strlen(weather_layer->fcst_str)], itoa(l), 4);
+//	memcpy(&weather_layer->fcst_str[strlen(weather_layer->fcst_str)], "°", 3);
+	//memcpy(&weather_layer->fcst_str[strlen(weather_layer->fcst_str)], f, 3);
+	text_layer_set_text(&text_fcst_layer, fcst_text);
+//}
 //	if(fcsthigh_tuple) {
 //		weather_layer_set_temperature(&weather_layer, fcsthigh_tuple->value->int16);
 //	}
@@ -258,21 +266,30 @@ void handle_init(AppContextRef ctx)
     font_minute = fonts_load_custom_font(res_m);
     font_sun    = fonts_load_custom_font(res_s);
     
+    //Forecast Text
+    
+	text_layer_init(&text_fcst_layer, window.layer.frame);
+	text_layer_set_text_color(&text_fcst_layer, GColorWhite);
+	text_layer_set_background_color(&text_fcst_layer, GColorClear);
+	layer_set_frame(&text_fcst_layer.layer, GRect(7, 143, 100, 30));
+	text_layer_set_font(&text_fcst_layer, font_sun);
+	layer_add_child(&window.layer, &text_fcst_layer.layer);
+    
     	// Sunrise Text
-	text_layer_init(&text_sunrise_layer, window.layer.frame);
-	text_layer_set_text_color(&text_sunrise_layer, GColorWhite);
-	text_layer_set_background_color(&text_sunrise_layer, GColorClear);
-	layer_set_frame(&text_sunrise_layer.layer, GRect(7, 143, 100, 30));
-	text_layer_set_font(&text_sunrise_layer, font_sun);
-	layer_add_child(&window.layer, &text_sunrise_layer.layer);
+//	text_layer_init(&text_sunrise_layer, window.layer.frame);
+//	text_layer_set_text_color(&text_sunrise_layer, GColorWhite);
+//	text_layer_set_background_color(&text_sunrise_layer, GColorClear);
+//	layer_set_frame(&text_sunrise_layer.layer, GRect(7, 143, 100, 30));
+//	text_layer_set_font(&text_sunrise_layer, font_sun);
+//	layer_add_child(&window.layer, &text_sunrise_layer.layer);
 
 	// Sunset Text
-	text_layer_init(&text_sunset_layer, window.layer.frame);
-	text_layer_set_text_color(&text_sunset_layer, GColorWhite);
-	text_layer_set_background_color(&text_sunset_layer, GColorClear);
-	layer_set_frame(&text_sunset_layer.layer, GRect(94, 143, 100, 30));
-	text_layer_set_font(&text_sunset_layer, font_sun);
-	layer_add_child(&window.layer, &text_sunset_layer.layer); 
+//	text_layer_init(&text_sunset_layer, window.layer.frame);
+//	text_layer_set_text_color(&text_sunset_layer, GColorWhite);
+//	text_layer_set_background_color(&text_sunset_layer, GColorClear);
+//	layer_set_frame(&text_sunset_layer.layer, GRect(94, 143, 100, 30));
+//	text_layer_set_font(&text_sunset_layer, font_sun);
+//	layer_add_child(&window.layer, &text_sunset_layer.layer); 
 
     time_layer_init(&time_layer, window.layer.frame);
     time_layer_set_text_color(&time_layer, GColorWhite);
