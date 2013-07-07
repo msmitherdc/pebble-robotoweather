@@ -35,6 +35,9 @@ PBL_APP_INFO(MY_UUID,
 Window window;          /* main window */
 TextLayer date_layer;   /* layer for the date */
 TimeLayer time_layer;   /* layer for the time */
+TextLayer text_sunrise_layer;
+TextLayer text_sunset_layer;
+
 
 GFont font_date;        /* font for date (normal) */
 GFont font_hour;        /* font for hour (bold) */
@@ -45,6 +48,7 @@ static int initial_minute;
 //Weather Stuff
 static int our_latitude, our_longitude;
 static bool located = false;
+static bool calculated_sunset_sunrise = false;
 
 WeatherLayer weather_layer;
 
@@ -98,6 +102,65 @@ void request_weather();
 
 /* Called by the OS once per minute. Update the time and date.
 */
+
+void updateSunsetSunrise()
+{
+	// Calculating Sunrise/sunset with courtesy of Michael Ehrmann
+	// https://github.com/mehrmann/pebble-sunclock
+	static char sunrise_text[] = "00:00";
+	static char sunset_text[]  = "00:00";
+
+	PblTm pblTime;
+	get_time(&pblTime);
+
+	char *time_format;
+
+	if (clock_is_24h_style()) 
+	{
+	  time_format = "%R";
+	} 
+	else 
+	{
+	  time_format = "%I:%M";
+	}
+
+	float sunriseTime = calcSunRise(pblTime.tm_year, pblTime.tm_mon+1, pblTime.tm_mday, our_latitude / 10000, our_longitude / 10000, 91.0f);
+	float sunsetTime = calcSunSet(pblTime.tm_year, pblTime.tm_mon+1, pblTime.tm_mday, our_latitude / 10000, our_longitude / 10000, 91.0f);
+	adjustTimezone(&sunriseTime);
+	adjustTimezone(&sunsetTime);
+
+	if (!pblTime.tm_isdst) 
+	{
+	  sunriseTime+=1;
+	  sunsetTime+=1;
+	} 
+
+	pblTime.tm_min = (int)(60*(sunriseTime-((int)(sunriseTime))));
+	pblTime.tm_hour = (int)sunriseTime;
+	string_format_time(sunrise_text, sizeof(sunrise_text), time_format, &pblTime);
+	text_layer_set_text(&text_sunrise_layer, sunrise_text);
+
+	pblTime.tm_min = (int)(60*(sunsetTime-((int)(sunsetTime))));
+	pblTime.tm_hour = (int)sunsetTime;
+	string_format_time(sunset_text, sizeof(sunset_text), time_format, &pblTime);
+	text_layer_set_text(&text_sunset_layer, sunset_text);
+}
+
+void receivedtime(int32_t utc_offset_seconds, bool is_dst, uint32_t unixtime, const char* tz_name, void* context)
+{	
+	our_timezone = (utc_offset_seconds / 3600);
+	if (is_dst)
+	{
+		our_timezone--;
+	}
+
+	if (located && our_timezone != 99 && !calculated_sunset_sunrise)
+    {
+        updateSunsetSunrise();
+	    calculated_sunset_sunrise = true;
+    }
+}
+
 void handle_minute_tick(AppContextRef ctx, PebbleTickEvent *t)
 {
     /* Need to be static because pointers to them are stored in the text
@@ -172,6 +235,22 @@ void handle_init(AppContextRef ctx)
     font_date = fonts_load_custom_font(res_d);
     font_hour = fonts_load_custom_font(res_h);
     font_minute = fonts_load_custom_font(res_m);
+    
+    	// Sunrise Text
+	text_layer_init(&text_sunrise_layer, window.layer.frame);
+	text_layer_set_text_color(&text_sunrise_layer, GColorWhite);
+	text_layer_set_background_color(&text_sunrise_layer, GColorClear);
+	layer_set_frame(&text_sunrise_layer.layer, GRect(7, 152, 100, 30));
+	text_layer_set_font(&text_sunrise_layer, fonts_get_system_font(FONT_KEY_GOTHIC_14));
+	layer_add_child(&window.layer, &text_sunrise_layer.layer);
+
+	// Sunset Text
+	text_layer_init(&text_sunset_layer, window.layer.frame);
+	text_layer_set_text_color(&text_sunset_layer, GColorWhite);
+	text_layer_set_background_color(&text_sunset_layer, GColorClear);
+	layer_set_frame(&text_sunset_layer.layer, GRect(110, 152, 100, 30));
+	text_layer_set_font(&text_sunset_layer, fonts_get_system_font(FONT_KEY_GOTHIC_14));
+	layer_add_child(&window.layer, &text_sunset_layer.layer); 
 
     time_layer_init(&time_layer, window.layer.frame);
     time_layer_set_text_color(&time_layer, GColorWhite);
@@ -192,7 +271,7 @@ void handle_init(AppContextRef ctx)
 	weather_layer_init(&weather_layer, GPoint(0, 95)); //0, 100
 	layer_add_child(&window.layer, &weather_layer.layer);
 	
-	http_register_callbacks((HTTPCallbacks){.failure=failed,.success=success,.reconnect=reconnect,.location=location}, (void*)ctx);
+	http_register_callbacks((HTTPCallbacks){.failure=failed,.success=success,.reconnect=reconnect,.location=location,.time=receivedtime}, (void*)ctx);
 	
 	// Refresh time
 	get_time(&tm);
