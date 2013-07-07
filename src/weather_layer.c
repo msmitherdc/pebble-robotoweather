@@ -55,12 +55,12 @@ void weather_layer_set_temperature(WeatherLayer* weather_layer, int16_t t) {
 	text_layer_set_text(&weather_layer->temp_layer, weather_layer->temp_str);
 }
 
-void weather_layer_set_forecast(WeatherLayer* weather_layer, int16_t h, int16_t l, str f) {
+void weather_layer_set_forecast(WeatherLayer* weather_layer, int16_t h, int16_t l) {
 	memcpy(weather_layer->fcst_str, itoa(h), 4);
 	memcpy(&weather_layer->fcst_str[strlen(weather_layer->fcst_str)], "°/", 3);
 	memcpy(&weather_layer->fcst_str[strlen(weather_layer->fcst_str)], itoa(l), 4);
-	memcpy(&weather_layer->fcst_str[strlen(weather_layer->fcst_str)], "°  ", 3);
-	memcpy(&weather_layer->fcst_str[strlen(weather_layer->fcst_str)], f, 3);
+	memcpy(&weather_layer->fcst_str[strlen(weather_layer->fcst_str)], "°", 3);
+	//memcpy(&weather_layer->fcst_str[strlen(weather_layer->fcst_str)], f, 3);
 	text_layer_set_text(&weather_layer->fcst_layer, weather_layer->fcst_str);
 }
 
