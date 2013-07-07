@@ -30,6 +30,9 @@ PBL_APP_INFO(MY_UUID,
 // Received variables
 #define WEATHER_KEY_ICON 1
 #define WEATHER_KEY_TEMPERATURE 2
+#define WEATHER_KEY_FCSTHIGH 3
+#define WEATHER_KEY_FCSTLOW 4
+#define WEATHER_KEY_FCST   5
 	
 #define WEATHER_HTTP_COOKIE 1949327671
 #define TIME_HTTP_COOKIE 1131038282
@@ -83,6 +86,10 @@ void success(int32_t cookie, int http_status, DictionaryIterator* received, void
 	Tuple* temperature_tuple = dict_find(received, WEATHER_KEY_TEMPERATURE);
 	if(temperature_tuple) {
 		weather_layer_set_temperature(&weather_layer, temperature_tuple->value->int16);
+	}
+	Tuple* fcsthigh_tuple = dict_find(received, WEATHER_KEY_FCSTHIGH);
+	if(fcsthigh_tuple) {
+		weather_layer_set_temperature(&weather_layer, fcsthigh_tuple->value->int16);
 	}
 	
 	link_monitor_handle_success();
