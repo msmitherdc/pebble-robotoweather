@@ -89,9 +89,11 @@ void success(int32_t cookie, int http_status, DictionaryIterator* received, void
 		weather_layer_set_temperature(&weather_layer, temperature_tuple->value->int16);
 	}
 	Tuple* fcstlow_tuple = dict_find(received, WEATHER_KEY_FCSTLOW);
-	static char fcst_text[]  = "";
+	static char fcst_text[]  = ""
+	uint16_t value = fcstlow_tuple->value->int16;
+	memcpy(fcst_text, itoa(value), 4);)
 //	void weather_layer_set_forecast(WeatherLayer* weather_layer, int16_t h, int16_t l) {
-	memcpy(text_fcst_layer->fcst_text, itoa(l), 4);
+//	memcpy(text_fcst_layer->fcst_text, itoa(fcstlow_tuple), 4);
 //	memcpy(&weather_layer->fcst_str[strlen(weather_layer->fcst_str)], "°/", 3);
 //	memcpy(&weather_layer->fcst_str[strlen(weather_layer->fcst_str)], itoa(l), 4);
 //	memcpy(&weather_layer->fcst_str[strlen(weather_layer->fcst_str)], "°", 3);
