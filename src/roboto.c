@@ -44,6 +44,7 @@ TextLayer text_sunset_layer;
 GFont font_date;        /* font for date (normal) */
 GFont font_hour;        /* font for hour (bold) */
 GFont font_minute;      /* font for minute (thin) */
+GFont font_sun;		/* font for sunrise(condensed) */
 
 static int initial_minute;
 
@@ -241,7 +242,7 @@ void handle_init(AppContextRef ctx)
     res_d = resource_get_handle(RESOURCE_ID_FONT_ROBOTO_CONDENSED_21);
     res_h = resource_get_handle(RESOURCE_ID_FONT_ROBOTO_BOLD_SUBSET_49);
     res_m = resource_get_handle(RESOURCE_ID_FONT_ROBOTO_BOLD_SUBSET_49);
-    res_s = resource_get_handle(RESOURCE_ID_FONT_ROBOTO_CONDENSED_14);
+    res_s = resource_get_handle(RESOURCE_ID_FONT_ROBOTO_CONDENSED_21);
 
     font_date = fonts_load_custom_font(res_d);
     font_hour = fonts_load_custom_font(res_h);
