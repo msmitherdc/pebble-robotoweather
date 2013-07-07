@@ -19,8 +19,8 @@ PBL_APP_INFO(MY_UUID,
              RESOURCE_ID_IMAGE_MENU_ICON,
              APP_INFO_WATCH_FACE);
 
-#define TIME_FRAME      (GRect(0, 6, 144, 168-6))
-#define DATE_FRAME      (GRect(0, 62, 144, 168-62))
+#define TIME_FRAME      (GRect(0, 2, 144, 168-6))
+#define DATE_FRAME      (GRect(0, 58, 144, 168-62))
 
 // POST variables
 #define WEATHER_KEY_LATITUDE 1
@@ -281,7 +281,7 @@ void handle_init(AppContextRef ctx)
     layer_add_child(&window.layer, &date_layer.layer);
 
 	// Add weather layer
-	weather_layer_init(&weather_layer, GPoint(0, 84)); //0, 100
+	weather_layer_init(&weather_layer, GPoint(0, 80)); //0, 100
 	layer_add_child(&window.layer, &weather_layer.layer);
 	
 	http_register_callbacks((HTTPCallbacks){.failure=failed,.success=success,.reconnect=reconnect,.location=location,.time=receivedtime}, (void*)ctx);
