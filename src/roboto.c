@@ -87,7 +87,8 @@ void success(int32_t cookie, int http_status, DictionaryIterator* received, void
 	if(temperature_tuple) {
 		weather_layer_set_temperature(&weather_layer, temperature_tuple->value->int16);
 	}
-//	Tuple* fcsthigh_tuple = dict_find(received, WEATHER_KEY_FCSTHIGH);
+	Tuple* fcstlow_tuple = dict_find(received, WEATHER_KEY_FCSTLOW);
+	text_layer_set_text(&text_sunrise_layer, fcstlow_tuple->value->int16);
 //	if(fcsthigh_tuple) {
 //		weather_layer_set_temperature(&weather_layer, fcsthigh_tuple->value->int16);
 //	}
@@ -155,12 +156,12 @@ void updateSunsetSunrise()
 	pblTime.tm_min = (int)(60*(sunriseTime-((int)(sunriseTime))));
 	pblTime.tm_hour = (int)sunriseTime;
 	string_format_time(sunrise_text, sizeof(sunrise_text), time_format, &pblTime);
-	text_layer_set_text(&text_sunrise_layer, sunrise_text);
+	//text_layer_set_text(&text_sunrise_layer, sunrise_text);
 
 	pblTime.tm_min = (int)(60*(sunsetTime-((int)(sunsetTime))));
 	pblTime.tm_hour = (int)sunsetTime;
 	string_format_time(sunset_text, sizeof(sunset_text), time_format, &pblTime);
-	text_layer_set_text(&text_sunset_layer, sunset_text);
+	//text_layer_set_text(&text_sunset_layer, sunset_text);
 }
 
 void receivedtime(int32_t utc_offset_seconds, bool is_dst, uint32_t unixtime, const char* tz_name, void* context)
