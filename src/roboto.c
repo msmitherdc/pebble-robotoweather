@@ -230,6 +230,7 @@ void handle_init(AppContextRef ctx)
     ResHandle res_d;
     ResHandle res_h;
     ResHandle res_m;
+    ResHandle res_s;
 
     window_init(&window, "Roboto");
     window_stack_push(&window, true /* Animated */);
