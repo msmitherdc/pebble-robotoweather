@@ -8,6 +8,7 @@
 #include "time_layer.h"
 #include "link_monitor.h"
 #include "config.h"
+#include "suncalc.h"
 
 #define MY_UUID { 0x91, 0x41, 0xB6, 0x28, 0xBC, 0x89, 0x49, 0x8E, 0xB1, 0x47, 0x04, 0x9F, 0x49, 0xC0, 0x99, 0xAD }
 
@@ -46,7 +47,7 @@ GFont font_minute;      /* font for minute (thin) */
 static int initial_minute;
 
 //Weather Stuff
-static int our_latitude, our_longitude;
+static int our_latitude, our_longitude, our_timezone = 99;;
 static bool located = false;
 static bool calculated_sunset_sunrise = false;
 
