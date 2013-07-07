@@ -89,9 +89,8 @@ void success(int32_t cookie, int http_status, DictionaryIterator* received, void
 		weather_layer_set_temperature(&weather_layer, temperature_tuple->value->int16);
 	}
 	Tuple* fcstlow_tuple = dict_find(received, WEATHER_KEY_FCSTLOW);
-	static char fcst_text[]  = "";
-	int16_t value = fcstlow_tuple->value->int16;
-	memcpy(fcst_text, itoa(value), 4);
+	static char fcst_text[]  = "00";
+	memcpy(fcst_text, itoa(fcstlow_tuple->value->int16), 4);
 //	void weather_layer_set_forecast(WeatherLayer* weather_layer, int16_t h, int16_t l) {
 //	memcpy(text_fcst_layer->fcst_text, itoa(fcstlow_tuple), 4);
 //	memcpy(&weather_layer->fcst_str[strlen(weather_layer->fcst_str)], "°/", 3);
@@ -261,7 +260,7 @@ void handle_init(AppContextRef ctx)
     res_d = resource_get_handle(RESOURCE_ID_FONT_ROBOTO_CONDENSED_21);
     res_h = resource_get_handle(RESOURCE_ID_FONT_ROBOTO_BOLD_SUBSET_49);
     res_m = resource_get_handle(RESOURCE_ID_FONT_ROBOTO_BOLD_SUBSET_49);
-    res_s = resource_get_handle(RESOURCE_ID_FONT_ROBOTO_THIN_SUBSET_49);
+    res_s = resource_get_handle(RESOURCE_ID_FONT_ROBOTO_THIN_SUBSET_14);
 
     font_date = fonts_load_custom_font(res_d);
     font_hour = fonts_load_custom_font(res_h);
