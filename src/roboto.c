@@ -42,6 +42,7 @@ TextLayer date_layer;   /* layer for the date */
 TimeLayer time_layer;   /* layer for the time */
 TextLayer text_sunrise_layer;
 TextLayer text_sunset_layer;
+TextLayer text_fcst_layer;
 
 
 GFont font_date;        /* font for date (normal) */
