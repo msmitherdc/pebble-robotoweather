@@ -9,6 +9,7 @@
 #include "link_monitor.h"
 #include "config.h"
 #include "suncalc.h"
+#include "my_math.h"
 
 #define MY_UUID { 0x91, 0x41, 0xB6, 0x28, 0xBC, 0x89, 0x49, 0x8E, 0xB1, 0x47, 0x04, 0x9F, 0x49, 0xC0, 0x99, 0xAD }
 
@@ -103,6 +104,13 @@ void request_weather();
 
 /* Called by the OS once per minute. Update the time and date.
 */
+
+void adjustTimezone(float* time) 
+{
+  *time += our_timezone;
+  if (*time > 24) *time -= 24;
+  if (*time < 0) *time += 24;
+}
 
 void updateSunsetSunrise()
 {
