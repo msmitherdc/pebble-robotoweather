@@ -280,7 +280,7 @@ void handle_init(AppContextRef ctx)
 	text_layer_init(&text_fcst_layer, window.layer.frame);
 	text_layer_set_text_color(&text_fcst_layer, GColorWhite);
 	text_layer_set_background_color(&text_fcst_layer, GColorClear);
-	layer_set_frame(&text_fcst_layer.layer, GRect(7, 143, 100, 75));
+	layer_set_frame(&text_fcst_layer.layer, GRect(7, 143, 100, 30));
 	text_layer_set_font(&text_fcst_layer, font_sun);
 	layer_add_child(&window.layer, &text_fcst_layer.layer);
     
