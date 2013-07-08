@@ -96,13 +96,12 @@ void success(int32_t cookie, int http_status, DictionaryIterator* received, void
 	
 	Tuple* fcstlow_tuple = dict_find(received, WEATHER_KEY_FCSTLOW);
 	memcpy(fcstlow_text, itoa(fcstlow_tuple->value->int16), fcstlow_tuple->length);
-	memcpy(fcstspc_text, "°/ ", 4);
 	Tuple* fcsthigh_tuple = dict_find(received, WEATHER_KEY_FCSTHIGH);
 	memcpy(fcsthigh_text, itoa(fcsthigh_tuple->value->int16), fcsthigh_tuple->length);
 	
 	strcat(fcst_text, fcstlow_text);
-	strcat(fcst_text, fcstspc_text);
-	strcat(fcst_text, fcsthigh_text);
+	strcat(fcst_text, " / ");
+	//strcat(fcst_text, fcsthigh_text);
 	
 //	void weather_layer_set_forecast(WeatherLayer* weather_layer, int16_t h, int16_t l) {
 //	memcpy(text_fcst_layer->fcst_text, itoa(fcstlow_tuple), 4);
