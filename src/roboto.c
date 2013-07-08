@@ -234,9 +234,9 @@ void handle_minute_tick(AppContextRef ctx, PebbleTickEvent *t)
     string_format_time(minute_text, sizeof(minute_text), ":%M", t->tick_time);
     time_layer_set_text(&time_layer, hour_text, minute_text);
 	
-	if(!located || (t->tick_time->tm_min % 30) == initial_minute)
+	if(!located || (t->tick_time->tm_min % 5) == initial_minute)
 	{
-		//Every 30 minutes, request updated weather
+		//Every 5 minutes, request updated weather
 		http_location_request();
 	}
 	else
@@ -322,10 +322,10 @@ void handle_init(AppContextRef ctx)
 	
 	// Refresh time
 	get_time(&tm);
-    t.tick_time = &tm;
-    t.units_changed = SECOND_UNIT | MINUTE_UNIT | HOUR_UNIT | DAY_UNIT;
+        t.tick_time = &tm;
+        t.units_changed = SECOND_UNIT | MINUTE_UNIT | HOUR_UNIT | DAY_UNIT;
 	
-	initial_minute = (tm.tm_min % 30);
+	//initial_minute = (tm.tm_min % 30);
 	
 	handle_minute_tick(ctx, &t);
 }
@@ -357,7 +357,7 @@ void pbl_main(void *params)
         },
 		.messaging_info = {
 			.buffer_sizes = {
-				.inbound = 124,
+				.inbound =  124,
 				.outbound = 124,
 			}
 		}
