@@ -101,15 +101,15 @@ void success(int32_t cookie, int http_status, DictionaryIterator* received, void
 	Tuple* fcsthigh_tuple = dict_find(received, WEATHER_KEY_FCSTHIGH);
 	memcpy(fcsthigh_text, itoa(fcsthigh_tuple->value->int16), fcsthigh_tuple->length);
 	
-	Tuple* fcstcond_tuple = dict_find(received, WEATHER_KEY_FCST);
-	memcpy(fcstcond_text, fcstcond_tuple->value->cstring, strlen(fcstcond_tuple->value->cstring));
+	//Tuple* fcstcond_tuple = dict_find(received, WEATHER_KEY_FCST);
+	//memcpy(fcstcond_text, fcstcond_tuple->value->cstring, strlen(fcstcond_tuple->value->cstring));
 	//fcstcond_text[strlen(fcstcond_tuple->value->cstring)] = '\0';
 	
 	strcat(fcst_text, fcstlow_text);
 	strcat(fcst_text, "° / ");
 	strcat(fcst_text, fcsthigh_text);
 	strcat(fcst_text, "°  ");
-	strcat(fcst_text, fcstcond_text);
+	//strcat(fcst_text, fcstcond_text);
 	text_layer_set_text(&text_fcst_layer, fcst_text);	
 	link_monitor_handle_success();
 }
