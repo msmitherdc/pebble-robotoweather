@@ -102,7 +102,7 @@ void success(int32_t cookie, int http_status, DictionaryIterator* received, void
 	memcpy(fcsthigh_text, itoa(fcsthigh_tuple->value->int16), fcsthigh_tuple->length);
 	
 	Tuple* fcstcond_tuple = dict_find(received, WEATHER_KEY_FCST);
-	memcpy(fcstcond_text, itoa(fcsthigh_tuple->value->char), fcstcont_tuple->length);
+	memcpy(fcstcond_text, itoa(fcstcond_tuple->value->char), fcstcond_tuple->length);
 	
 	strcat(fcst_text, fcstlow_text);
 	strcat(fcst_text, "° / ");
