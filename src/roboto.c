@@ -100,8 +100,9 @@ void success(int32_t cookie, int http_status, DictionaryIterator* received, void
 	memcpy(fcsthigh_text, itoa(fcsthigh_tuple->value->int16), fcsthigh_tuple->length);
 	
 	strcat(fcst_text, fcstlow_text);
-	strcat(fcst_text, " / ");
-	//strcat(fcst_text, fcsthigh_text);
+	strcat(fcst_text, "° / ");
+	strcat(fcst_text, fcsthigh_text);
+	strcat(fcst_text, "°");
 	
 //	void weather_layer_set_forecast(WeatherLayer* weather_layer, int16_t h, int16_t l) {
 //	memcpy(text_fcst_layer->fcst_text, itoa(fcstlow_tuple), 4);
