@@ -103,7 +103,7 @@ void success(int32_t cookie, int http_status, DictionaryIterator* received, void
 	
 	Tuple* fcstcond_tuple = dict_find(received, WEATHER_KEY_FCST);
 	memcpy(fcstcond_text, fcstcond_tuple->value->cstring, strlen(fcstcond_tuple->value->cstring));
-	fcstcond_text[strlen(fcstcond_tuple->value->cstring)] = '\0';
+	//fcstcond_text[strlen(fcstcond_tuple->value->cstring)] = '\0';
 	
 	strcat(fcst_text, fcstlow_text);
 	strcat(fcst_text, "° / ");
@@ -280,7 +280,7 @@ void handle_init(AppContextRef ctx)
 	text_layer_init(&text_fcst_layer, window.layer.frame);
 	text_layer_set_text_color(&text_fcst_layer, GColorWhite);
 	text_layer_set_background_color(&text_fcst_layer, GColorClear);
-	layer_set_frame(&text_fcst_layer.layer, GRect(7, 143, 100, 25));
+	layer_set_frame(&text_fcst_layer.layer, GRect(7, 143, 100, 75));
 	text_layer_set_font(&text_fcst_layer, font_sun);
 	layer_add_child(&window.layer, &text_fcst_layer.layer);
     
