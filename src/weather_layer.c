@@ -55,22 +55,6 @@ void weather_layer_set_temperature(WeatherLayer* weather_layer, int16_t t) {
 	text_layer_set_text(&weather_layer->temp_layer, weather_layer->temp_str);
 }
 
-void weather_layer_set_forecast(WeatherLayer* weather_layer, int16_t hi, int16_t lo) {
-	memcpy(weather_layer->fcstlow_text, itoa(lo), 4);
-	memcpy(weather_layer->fcsthigh_text, itoa(hi), 4);
-
-	//Tuple* fcstcond_tuple = dict_find(received, WEATHER_KEY_FCST);
-	//memcpy(fcstcond_text, fcstcond_tuple->value->cstring, strlen(fcstcond_tuple->value->cstring));
-	//fcstcond_text[strlen(fcstcond_tuple->value->cstring)] = '\0';
-
-	strcat(weather_layer->fcst_text, weather_layer->fcstlow_text);
-	strcat(weather_layer->fcst_text, "° / ");
-	strcat(weather_layer->fcst_text, weather_layer->fcsthigh_text);
-	strcat(weather_layer->fcst_text, "°  ");
-	//strcat(fcst_text, fcstcond_text);
-	text_layer_set_text(&text_fcst_layer, weather_layer->fcst_text);
-}
-
 void weather_layer_deinit(WeatherLayer* weather_layer) {
 	if(weather_layer->has_weather_icon)
 		bmp_deinit_container(&weather_layer->icon_layer);
