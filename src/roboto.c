@@ -94,22 +94,22 @@ void success(int32_t cookie, int http_status, DictionaryIterator* received, void
 	//static char fcstcond_text[]  = "";
 	static char fcst_text[]  = "";
 	
-	//Tuple* fcstlow_tuple = dict_find(received, WEATHER_KEY_FCSTLOW);
-	//memcpy(fcstlow_text, itoa(fcstlow_tuple->value->int16), fcstlow_tuple->length);
+	Tuple* fcstlow_tuple = dict_find(received, WEATHER_KEY_FCSTLOW);
+	memcpy(fcstlow_text, itoa(fcstlow_tuple->value->int16), fcstlow_tuple->length);
 	
-	//Tuple* fcsthigh_tuple = dict_find(received, WEATHER_KEY_FCSTHIGH);
-	//memcpy(fcsthigh_text, itoa(fcsthigh_tuple->value->int16), fcsthigh_tuple->length);
+	Tuple* fcsthigh_tuple = dict_find(received, WEATHER_KEY_FCSTHIGH);
+	memcpy(fcsthigh_text, itoa(fcsthigh_tuple->value->int16), fcsthigh_tuple->length);
 	
 	//Tuple* fcstcond_tuple = dict_find(received, WEATHER_KEY_FCST);
 	//memcpy(fcstcond_text, fcstcond_tuple->value->cstring, strlen(fcstcond_tuple->value->cstring));
 	//fcstcond_text[strlen(fcstcond_tuple->value->cstring)] = '\0';
 	
-	//strcat(fcst_text, fcstlow_text);
-	//strcat(fcst_text, "° / ");
-	//strcat(fcst_text, fcsthigh_text);
-	//strcat(fcst_text, "°  ");
+	strcat(fcst_text, fcstlow_text);
+	strcat(fcst_text, "° / ");
+	strcat(fcst_text, fcsthigh_text);
+	strcat(fcst_text, "°  ");
 	//strcat(fcst_text, fcstcond_text);
-	//text_layer_set_text(&text_fcst_layer, fcst_text);	
+	text_layer_set_text(&text_fcst_layer, fcst_text);	
 	link_monitor_handle_success();
 }
 
@@ -267,7 +267,7 @@ void handle_init(AppContextRef ctx)
     res_d = resource_get_handle(RESOURCE_ID_FONT_ROBOTO_CONDENSED_21);
     res_h = resource_get_handle(RESOURCE_ID_FONT_ROBOTO_BOLD_SUBSET_49);
     res_m = resource_get_handle(RESOURCE_ID_FONT_ROBOTO_BOLD_SUBSET_49);
-    res_s = resource_get_handle(RESOURCE_ID_FONT_ROBOTO_CONDENSED_21);
+    res_s = resource_get_handle(RESOURCE_ID_GOTHIC_14);
 
     font_date = fonts_load_custom_font(res_d);
     font_hour = fonts_load_custom_font(res_h);
@@ -276,12 +276,12 @@ void handle_init(AppContextRef ctx)
     
     //Forecast Text
     
-//	text_layer_init(&text_fcst_layer, window.layer.frame);
-//	text_layer_set_text_color(&text_fcst_layer, GColorWhite);
-//	text_layer_set_background_color(&text_fcst_layer, GColorClear);
-//	layer_set_frame(&text_fcst_layer.layer, GRect(7, 143, 100, 25));
-//	text_layer_set_font(&text_fcst_layer, font_sun);
-//	layer_add_child(&window.layer, &text_fcst_layer.layer);
+	text_layer_init(&text_fcst_layer, window.layer.frame);
+	text_layer_set_text_color(&text_fcst_layer, GColorWhite);
+	text_layer_set_background_color(&text_fcst_layer, GColorClear);
+	layer_set_frame(&text_fcst_layer.layer, GRect(7, 143, 100, 25));
+	text_layer_set_font(&text_fcst_layer, font_sun);
+	layer_add_child(&window.layer, &text_fcst_layer.layer);
     
     	// Sunrise Text
 //	text_layer_init(&text_sunrise_layer, window.layer.frame);
