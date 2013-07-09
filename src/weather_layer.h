@@ -8,7 +8,10 @@ typedef struct {
 	bool has_weather_icon;
 	char temp_str[5];
 	TextLayer fcst_layer;
-	char fcst_str[100];
+	char fcstlow_text[];
+	char fcsthigh_text[];
+	//static char fcstcond_text[]  = "";
+	char fcst_text[];
 } WeatherLayer;
 
 typedef enum {
@@ -35,6 +38,6 @@ void weather_layer_init(WeatherLayer* weather_layer, GPoint pos);
 void weather_layer_deinit(WeatherLayer* weather_layer);
 void weather_layer_set_icon(WeatherLayer* weather_layer, WeatherIcon icon);
 void weather_layer_set_temperature(WeatherLayer* weather_layer, int16_t temperature);
-//void weather_layer_set_forecast(WeatherLayer* weather_layer, int16_t h, int16_t l);
+void weather_layer_set_forecast(WeatherLayer* weather_layer, int16_t hi, int16_t lo);
 
 #endif
