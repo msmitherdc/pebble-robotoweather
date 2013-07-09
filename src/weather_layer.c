@@ -55,9 +55,9 @@ void weather_layer_set_temperature(WeatherLayer* weather_layer, int16_t t) {
 	text_layer_set_text(&weather_layer->temp_layer, weather_layer->temp_str);
 }
 
-void weather_layer.set_forecast(WeatherLayer* weather_layer, int16_t hi, int16_t lo) {
-	memcpy(fcstlow_text, itoa(fcstlow_tuple->value->int16), fcstlow_tuple->length);
-	memcpy(fcsthigh_text, itoa(fcsthigh_tuple->value->int16), fcsthigh_tuple->length);
+void weather_layer_set_forecast(WeatherLayer* weather_layer, int16_t hi, int16_t lo) {
+	memcpy(fcstlow_text, itoa(lo), lo->length);
+	memcpy(fcsthigh_text, itoa(hi), hi->length);
 
 	//Tuple* fcstcond_tuple = dict_find(received, WEATHER_KEY_FCST);
 	//memcpy(fcstcond_text, fcstcond_tuple->value->cstring, strlen(fcstcond_tuple->value->cstring));
