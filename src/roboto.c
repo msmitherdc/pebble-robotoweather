@@ -72,12 +72,11 @@ void fcst_layer_set_forecast(int16_t hi, int16_t lo, char* cond) {
 	memcpy(fcsthigh_text, itoa(hi), 4);
 	memcpy(fcstcond_text, cond, strlen(cond));
 	fcstcond_text[strlen(fcstcond_text)] = '\0';
-
-	strcat(fcst_text, fcstlow_text);
+	
+	strcpy(fcst_text, fcstlow_text);
 	strcat(fcst_text, "° / ");
 	strcat(fcst_text, fcsthigh_text);
 	strcat(fcst_text, "°  ");
-	strcat(fcst_text, "\0");
 	//strcat(fcst_text, fcstcond_text);
 	text_layer_set_text(&text_fcst_layer, fcst_text);
 	text_layer_set_text(&text_cond_layer, fcstcond_text);
