@@ -95,20 +95,20 @@ void success(int32_t cookie, int http_status, DictionaryIterator* received, void
 	//static char fcstcond_text[]  = "";
 	static char fcst_text[]  = "";
 	
-	//Tuple* fcstlow_tuple = dict_find(received, WEATHER_KEY_FCSTLOW);
-	//memcpy(fcstlow_text, itoa(fcstlow_tuple->value->int16), fcstlow_tuple->length);
+	Tuple* fcstlow_tuple = dict_find(received, WEATHER_KEY_FCSTLOW);
+	memcpy(fcstlow_text, itoa(fcstlow_tuple->value->int16), fcstlow_tuple->length);
 	
-	//Tuple* fcsthigh_tuple = dict_find(received, WEATHER_KEY_FCSTHIGH);
-	//memcpy(fcsthigh_text, itoa(fcsthigh_tuple->value->int16), fcsthigh_tuple->length);
+	Tuple* fcsthigh_tuple = dict_find(received, WEATHER_KEY_FCSTHIGH);
+	memcpy(fcsthigh_text, itoa(fcsthigh_tuple->value->int16), fcsthigh_tuple->length);
 	
 	//Tuple* fcstcond_tuple = dict_find(received, WEATHER_KEY_FCST);
 	//memcpy(fcstcond_text, fcstcond_tuple->value->cstring, strlen(fcstcond_tuple->value->cstring));
 	//fcstcond_text[strlen(fcstcond_tuple->value->cstring)] = '\0';
 	
-	//strcat(fcst_text, fcstlow_text);
-	strcat(fcst_text, "68° / ");
-	//strcat(fcst_text, fcsthigh_text);
-	strcat(fcst_text, "84°  ");
+	strcat(fcst_text, fcstlow_text);
+	strcat(fcst_text, "° / ");
+	strcat(fcst_text, fcsthigh_text);
+	strcat(fcst_text, "°  ");
 	//strcat(fcst_text, fcstcond_text);
 	text_layer_set_text(&text_fcst_layer, fcst_text);	
 	link_monitor_handle_success();
