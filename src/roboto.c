@@ -70,8 +70,6 @@ void request_weather();
 void fcst_layer_set_forecast(int16_t hi, int16_t lo, cstring cond) {
 	memcpy(fcstlow_text, itoa(lo), 4);
 	memcpy(fcsthigh_text, itoa(hi), 4);
-
-	//Tuple* fcstcond_tuple = dict_find(received, WEATHER_KEY_FCST);
 	memcpy(fcstcond_text, cond, strlen(cond));
 	fcstcond_text[strlen(fcstcond_text)] = '\0';
 
@@ -116,9 +114,13 @@ void success(int32_t cookie, int http_status, DictionaryIterator* received, void
 	
 	Tuple* fcstlow_tuple = dict_find(received, WEATHER_KEY_FCSTLOW);
 	Tuple* fcsthigh_tuple = dict_find(received, WEATHER_KEY_FCSTHIGH);
+	Tuple* fcstcond_tuple = dict_find(received, WEATHER_KEY_FCST);
 	if(fcstlow_tuple) {
-		fcst_layer_set_forecast( fcstlow_tuple->value->int16, fcsthigh_tuple->value->int16 );
+		fcst_layer_set_forecast( fcstlow_tuple->value->int16, fcsthigh_tuple->value->int16, 
+		fcstcond_tuple->value->cstring);
 	}
+	
+	
 	/*static char fcstlow_text[]  = "";
 	static char fcsthigh_text[]  = "";
 	//static char fcstcond_text[]  = "";
