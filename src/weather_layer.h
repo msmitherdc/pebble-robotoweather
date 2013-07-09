@@ -8,10 +8,10 @@ typedef struct {
 	bool has_weather_icon;
 	char temp_str[5];
 	TextLayer fcst_layer;
-	char fcstlow_text[];
-	char fcsthigh_text[];
+	char fcstlow_text[5];
+	char fcsthigh_text[5];
 	//static char fcstcond_text[]  = "";
-	char fcst_text[];
+	char fcst_text[40];
 } WeatherLayer;
 
 typedef enum {
