@@ -190,11 +190,11 @@ void receivedtime(int32_t utc_offset_seconds, bool is_dst, uint32_t unixtime, co
 		our_timezone--;
 	}
 
-	if (located && our_timezone != 99 && !calculated_sunset_sunrise)
+/*	if (located && our_timezone != 99 && !calculated_sunset_sunrise)
     {
         updateSunsetSunrise();
 	    calculated_sunset_sunrise = true;
-    }
+    } */
 }
 
 void handle_minute_tick(AppContextRef ctx, PebbleTickEvent *t)
