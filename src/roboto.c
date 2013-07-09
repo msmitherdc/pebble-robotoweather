@@ -93,7 +93,7 @@ void success(int32_t cookie, int http_status, DictionaryIterator* received, void
 	Tuple* fcstlow_tuple = dict_find(received, WEATHER_KEY_FCSTLOW);
 	Tuple* fcsthigh_tuple = dict_find(received, WEATHER_KEY_FCSTHIGH);
 	if(fcstlow_tuple) {
-		weather_layer_set_forecast(&weather_layer, fcstlow_tuple->value->int16, fcsthigh_tuple->value->int16 );
+		fcst_layer_set_forecast( fcstlow_tuple->value->int16, fcsthigh_tuple->value->int16 );
 	}
 	/*static char fcstlow_text[]  = "";
 	static char fcsthigh_text[]  = "";
@@ -141,6 +141,22 @@ void adjustTimezone(float* time)
   *time += our_timezone;
   if (*time > 24) *time -= 24;
   if (*time < 0) *time += 24;
+}
+
+void fcst_layer_set_forecast(int16_t hi, int16_t lo) {
+	memcpy(fcstlow_text, itoa(lo), 4);
+	memcpy(fcsthigh_text, itoa(hi), 4);
+
+	//Tuple* fcstcond_tuple = dict_find(received, WEATHER_KEY_FCST);
+	//memcpy(fcstcond_text, fcstcond_tuple->value->cstring, strlen(fcstcond_tuple->value->cstring));
+	//fcstcond_text[strlen(fcstcond_tuple->value->cstring)] = '\0';
+
+	strcat(fcst_text, weather_layer->fcstlow_text);
+	strcat(fcst_text, "° / ");
+	strcat(fcst_text, weather_layer->fcsthigh_text);
+	strcat(fcst_text, "°  ");
+	//strcat(fcst_text, fcstcond_text);
+	text_layer_set_text(&text_fcst_layer, weather_layer->fcst_text);
 }
 
 void updateSunsetSunrise()
