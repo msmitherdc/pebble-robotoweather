@@ -67,7 +67,7 @@ WeatherLayer weather_layer;
 
 void request_weather();
 
-void fcst_layer_set_forecast(int16_t hi, int16_t lo, cstring cond) {
+void fcst_layer_set_forecast(int16_t hi, int16_t lo, char* cond) {
 	memcpy(fcstlow_text, itoa(lo), 4);
 	memcpy(fcsthigh_text, itoa(hi), 4);
 	memcpy(fcstcond_text, cond, strlen(cond));
