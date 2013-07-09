@@ -273,6 +273,7 @@ void handle_init(AppContextRef ctx)
     font_hour = fonts_load_custom_font(res_h);
     font_minute = fonts_load_custom_font(res_m);
    // font_sun    = fonts_load_custom_font(res_s);
+    font_fcst = fonts_get_system_font(FONT_KEY_GOTHIC_14)
     
     //Forecast Text
     
@@ -280,7 +281,7 @@ void handle_init(AppContextRef ctx)
 	text_layer_set_text_color(&text_fcst_layer, GColorWhite);
 	text_layer_set_background_color(&text_fcst_layer, GColorClear);
 	layer_set_frame(&text_fcst_layer.layer, GRect(7, 143, 100, 25));
-	text_layer_set_font(&text_fcst_layer, res_d);
+	text_layer_set_font(&text_fcst_layer, font_fcst);
 	layer_add_child(&window.layer, &text_fcst_layer.layer);
     
     	// Sunrise Text
