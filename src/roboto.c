@@ -90,15 +90,19 @@ void success(int32_t cookie, int http_status, DictionaryIterator* received, void
 		weather_layer_set_temperature(&weather_layer, temperature_tuple->value->int16);
 	}
 	
-	static char fcstlow_text[]  = "";
+	Tuple* fcstlow_tuple = dict_find(received, WEATHER_KEY_FCSTLOW);
+	Tuple* fcsthigh_tuple = dict_find(received, WEATHER_KEY_FCSTHIGH);
+	if(fcstlow_tuple) {
+		weather_layer_set_forecast(&weather_layer, fcstlow_tuple->value->int16, fcsthigh_tuple->value->int16 );
+	}
+	/*static char fcstlow_text[]  = "";
 	static char fcsthigh_text[]  = "";
 	//static char fcstcond_text[]  = "";
 	static char fcst_text[]  = "";
 	
-	Tuple* fcstlow_tuple = dict_find(received, WEATHER_KEY_FCSTLOW);
 	memcpy(fcstlow_text, itoa(fcstlow_tuple->value->int16), fcstlow_tuple->length);
 	
-	Tuple* fcsthigh_tuple = dict_find(received, WEATHER_KEY_FCSTHIGH);
+	
 	memcpy(fcsthigh_text, itoa(fcsthigh_tuple->value->int16), fcsthigh_tuple->length);
 	
 	//Tuple* fcstcond_tuple = dict_find(received, WEATHER_KEY_FCST);
@@ -110,7 +114,7 @@ void success(int32_t cookie, int http_status, DictionaryIterator* received, void
 	strcat(fcst_text, fcsthigh_text);
 	strcat(fcst_text, "°  ");
 	//strcat(fcst_text, fcstcond_text);
-	text_layer_set_text(&text_fcst_layer, fcst_text);	
+	text_layer_set_text(&text_fcst_layer, fcst_text); */	
 	link_monitor_handle_success();
 }
 
