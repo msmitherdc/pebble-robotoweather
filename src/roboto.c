@@ -280,7 +280,7 @@ void handle_init(AppContextRef ctx)
 	text_layer_set_text_color(&text_fcst_layer, GColorWhite);
 	text_layer_set_background_color(&text_fcst_layer, GColorClear);
 	layer_set_frame(&text_fcst_layer.layer, GRect(7, 143, 100, 25));
-	text_layer_set_font(&text_fcst_layer, "RESOURCE_ID_GOTHIC_14");
+	text_layer_set_font(&text_fcst_layer, res_d);
 	layer_add_child(&window.layer, &text_fcst_layer.layer);
     
     	// Sunrise Text
