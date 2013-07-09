@@ -77,7 +77,7 @@ void fcst_layer_set_forecast(int16_t hi, int16_t lo, char* cond) {
 	strcat(fcst_text, "° / ");
 	strcat(fcst_text, fcsthigh_text);
 	strcat(fcst_text, "°  ");
-	fcst_text[strlen(fcstcond_text)]= '\0';
+	fcst_text[strlen(fcstcond_text)+1]= '\0';
 	//strcat(fcst_text, fcstcond_text);
 	text_layer_set_text(&text_fcst_layer, fcst_text);
 	text_layer_set_text(&text_cond_layer, fcstcond_text);
@@ -116,7 +116,7 @@ void success(int32_t cookie, int http_status, DictionaryIterator* received, void
 	Tuple* fcsthigh_tuple = dict_find(received, WEATHER_KEY_FCSTHIGH);
 	Tuple* fcstcond_tuple = dict_find(received, WEATHER_KEY_FCST);
 	if(fcstlow_tuple) {
-		fcst_layer_set_forecast( fcstlow_tuple->value->int16, fcsthigh_tuple->value->int16, 
+		fcst_layer_set_forecast( fcsthigh_tuple->value->int16, fcstlow_tuple->value->int16, 
 		fcstcond_tuple->value->cstring);
 	}
 	
@@ -311,7 +311,7 @@ void handle_init(AppContextRef ctx)
 	text_layer_init(&text_fcst_layer, window.layer.frame);
 	text_layer_set_text_color(&text_fcst_layer, GColorWhite);
 	text_layer_set_background_color(&text_fcst_layer, GColorClear);
-	layer_set_frame(&text_fcst_layer.layer, GRect(7, 135, 100, 25));
+	layer_set_frame(&text_fcst_layer.layer, GRect(7, 132, 100, 25));
 	text_layer_set_font(&text_fcst_layer, font_fcst);
 	layer_add_child(&window.layer, &text_fcst_layer.layer);
 	
@@ -354,7 +354,7 @@ void handle_init(AppContextRef ctx)
     layer_add_child(&window.layer, &date_layer.layer);
 
 	// Add weather layer
-	weather_layer_init(&weather_layer, GPoint(0, 70)); //0,80  //0, 100
+	weather_layer_init(&weather_layer, GPoint(0, 73)); //0,80  //0, 100
 	layer_add_child(&window.layer, &weather_layer.layer);
 	
 	http_register_callbacks((HTTPCallbacks){.failure=failed,.success=success,.reconnect=reconnect,.location=location,.time=receivedtime}, (void*)ctx);
