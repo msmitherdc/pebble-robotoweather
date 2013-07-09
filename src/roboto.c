@@ -49,6 +49,7 @@ GFont font_date;        /* font for date (normal) */
 GFont font_hour;        /* font for hour (bold) */
 GFont font_minute;      /* font for minute (thin) */
 GFont font_sun;		/* font for sunrise(condensed) */
+GFont font_fcst;	/* font for forecast(condensed) */
 
 static int initial_minute;
 
@@ -94,10 +95,10 @@ void success(int32_t cookie, int http_status, DictionaryIterator* received, void
 	//static char fcstcond_text[]  = "";
 	static char fcst_text[]  = "";
 	
-	Tuple* fcstlow_tuple = dict_find(received, WEATHER_KEY_FCSTLOW);
+	//Tuple* fcstlow_tuple = dict_find(received, WEATHER_KEY_FCSTLOW);
 	//memcpy(fcstlow_text, itoa(fcstlow_tuple->value->int16), fcstlow_tuple->length);
 	
-	Tuple* fcsthigh_tuple = dict_find(received, WEATHER_KEY_FCSTHIGH);
+	//Tuple* fcsthigh_tuple = dict_find(received, WEATHER_KEY_FCSTHIGH);
 	//memcpy(fcsthigh_text, itoa(fcsthigh_tuple->value->int16), fcsthigh_tuple->length);
 	
 	//Tuple* fcstcond_tuple = dict_find(received, WEATHER_KEY_FCST);
@@ -273,7 +274,7 @@ void handle_init(AppContextRef ctx)
     font_hour = fonts_load_custom_font(res_h);
     font_minute = fonts_load_custom_font(res_m);
    // font_sun    = fonts_load_custom_font(res_s);
-    font_fcst = fonts_get_system_font(FONT_KEY_GOTHIC_14)
+    font_fcst = fonts_get_system_font(FONT_KEY_GOTHIC_14);
     
     //Forecast Text
     
