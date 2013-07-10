@@ -43,7 +43,7 @@ TimeLayer time_layer;   /* layer for the time */
 TextLayer text_sunrise_layer;
 TextLayer text_sunset_layer;
 TextLayer text_fcst_layer;
-TextLayer text_cond_layer;
+//TextLayer text_cond_layer;
 
 char fcstlow_text[5];
 char fcsthigh_text[5];
@@ -77,9 +77,10 @@ void fcst_layer_set_forecast(int16_t hi, int16_t lo, char* cond) {
 	strcat(fcst_text, "° / ");
 	strcat(fcst_text, fcsthigh_text);
 	strcat(fcst_text, "°  ");
+	strcat(fcst_text, fcstcond_text)
 	//strcat(fcst_text, fcstcond_text);
 	text_layer_set_text(&text_fcst_layer, fcst_text);
-	text_layer_set_text(&text_cond_layer, fcstcond_text);
+	//text_layer_set_text(&text_cond_layer, fcstcond_text);
 	
 }
 
@@ -314,12 +315,12 @@ void handle_init(AppContextRef ctx)
 	text_layer_set_font(&text_fcst_layer, font_fcst);
 	layer_add_child(&window.layer, &text_fcst_layer.layer);
 	
-	text_layer_init(&text_cond_layer, window.layer.frame);
-	text_layer_set_text_color(&text_cond_layer, GColorWhite);
-	text_layer_set_background_color(&text_cond_layer, GColorClear);
-	layer_set_frame(&text_cond_layer.layer, GRect(7, 144, 100, 25));
-	text_layer_set_font(&text_cond_layer, font_fcst);
-	layer_add_child(&window.layer, &text_cond_layer.layer);
+//	text_layer_init(&text_cond_layer, window.layer.frame);
+//	text_layer_set_text_color(&text_cond_layer, GColorWhite);
+//	text_layer_set_background_color(&text_cond_layer, GColorClear);
+//	layer_set_frame(&text_cond_layer.layer, GRect(7, 144, 100, 25));
+//	text_layer_set_font(&text_cond_layer, font_fcst);
+//	layer_add_child(&window.layer, &text_cond_layer.layer);
     
     	// Sunrise Text
 //	text_layer_init(&text_sunrise_layer, window.layer.frame);
