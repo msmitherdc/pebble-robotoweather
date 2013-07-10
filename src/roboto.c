@@ -47,8 +47,8 @@ TextLayer text_fcst_layer;
 
 char fcstlow_text[5];
 char fcsthigh_text[5];
-char fcstcond_text[60];
-char fcst_text[40];
+char fcstcond_text[];
+char fcst_text[];
 
 GFont font_date;        /* font for date (normal) */
 GFont font_hour;        /* font for hour (bold) */
@@ -71,7 +71,7 @@ void fcst_layer_set_forecast(int16_t hi, int16_t lo, char* cond) {
 	memcpy(fcstlow_text, itoa(lo), 4);
 	memcpy(fcsthigh_text, itoa(hi), 4);
 	memcpy(fcstcond_text, cond, strlen(cond));
-	fcstcond_text[strlen(fcstcond_text)] = '\0';
+	//fcstcond_text[strlen(fcstcond_text)] = '\0';
 	
 	strcpy(fcst_text, fcstlow_text);
 	strcat(fcst_text, "° / ");
@@ -311,7 +311,7 @@ void handle_init(AppContextRef ctx)
 	text_layer_init(&text_fcst_layer, window.layer.frame);
 	text_layer_set_text_color(&text_fcst_layer, GColorWhite);
 	text_layer_set_background_color(&text_fcst_layer, GColorClear);
-	layer_set_frame(&text_fcst_layer.layer, GRect(7, 133, 100, 25));
+	layer_set_frame(&text_fcst_layer.layer, GRect(7, 138, 100, 40));
 	text_layer_set_font(&text_fcst_layer, font_fcst);
 	layer_add_child(&window.layer, &text_fcst_layer.layer);
 	
