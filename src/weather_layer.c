@@ -44,8 +44,7 @@ void weather_layer_set_icon(WeatherLayer* weather_layer, WeatherIcon icon) {
 	}
 	bmp_init_container(WEATHER_ICONS[icon], &weather_layer->icon_layer);
 	layer_add_child(&weather_layer->layer, &weather_layer->icon_layer.layer.layer);
-	//layer_set_frame(&weather_layer->icon_layer.layer.layer, GRect(10, 4, 60,60));
-	layer_set_frame(&weather_layer->icon_layer.layer.layer, GRect(10, 4, 50,50));	
+	layer_set_frame(&weather_layer->icon_layer.layer.layer, GRect(10, 4, 60,60));
 	weather_layer->has_weather_icon = true;
 }
 
