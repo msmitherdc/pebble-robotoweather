@@ -47,8 +47,8 @@ TextLayer text_fcst_layer;
 
 char fcstlow_text[5];
 char fcsthigh_text[5];
-char fcstcond_text[];
-char fcst_text[];
+char fcstcond_text[60];
+char fcst_text[100];
 
 GFont font_date;        /* font for date (normal) */
 GFont font_hour;        /* font for hour (bold) */
