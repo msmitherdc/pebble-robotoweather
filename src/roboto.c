@@ -77,7 +77,7 @@ void fcst_layer_set_forecast(int16_t hi, int16_t lo, char* cond) {
 	strcat(fcst_text, "° / ");
 	strcat(fcst_text, fcsthigh_text);
 	strcat(fcst_text, "°  ");
-	strcat(fcst_text, fcstcond_text)
+	strcat(fcst_text, fcstcond_text);
 	//strcat(fcst_text, fcstcond_text);
 	text_layer_set_text(&text_fcst_layer, fcst_text);
 	//text_layer_set_text(&text_cond_layer, fcstcond_text);
